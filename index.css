@@ -1,0 +1,126 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 10px;
+  background-color: #efefef;
+}
+
+body {
+  width: 100%;
+  max-width: 800px;
+  min-width: 375px;
+  margin: 0 auto;
+  background-color: ivory;
+}
+
+#heading {
+  width: 100%;
+  text-align: center;
+  font-size: 4rem;
+  margin: 0 auto;
+}
+
+#content {
+  overflow: scroll;
+  height: 500px;
+}
+
+#content table {
+  width: 100%;
+  font-size: 2rem;
+  white-space: nowrap;
+  margin: 0;
+  border: none;
+  border-collapse: separate;
+  border-spacing: 1px;
+  table-layout: fixed;
+  border: 1px solid black;
+  color: black;
+  background-color: white;
+}
+
+#content table th,
+#content table td {
+  padding: 0.5rem 1rem;
+  border: 1px solid black;
+}
+
+#content table thead tr:first-child th {
+  padding: 3px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  width: 25vw;
+  background-color: #66ff66;
+}
+#content table thead tr:nth-child(2) th {
+  padding: 3px;
+  position: sticky;
+  top: 29px;
+  z-index: 1;
+  width: 25vw;
+  background-color: #ccffcc;
+}
+/*#content table thead th:first-child {
+  background-color: white;
+  border: 0;
+}*/
+
+#content table td {
+  background-color: #f2f2f2;
+  padding: 4px 5px;
+  text-align: left;
+}
+
+#content table tbody th {
+  font-weight: 100;
+  font-style: italic;
+  text-align: center;
+  position: relative;
+}
+
+#content table thead tr:nth-child(2) th:first-child {
+  position: sticky;
+  left: 0;
+  background-color: ccffcc;
+  z-index: 2;
+}
+#content table tbody th {
+  position: sticky;
+  left: 0;
+  background-color: #ccffcc;
+  z-index: 0;
+}
+
+/*#content table tbody tr:hover {
+  background-color: black;
+  color: white;
+}*/
+/*#content table tbody tr td:nth-child(3),
+#content table tbody tr td:nth-child(6),
+#content table tbody tr td:nth-child(8),
+#content table tbody tr td:nth-child(10) {
+  text-align: center;
+}
+#content table tbody tr td:nth-child(2),
+#content table tbody tr td:nth-child(5),
+#content table tbody tr td:nth-child(7),
+#content table tbody tr td:nth-child(9) {
+  text-align: center;
+}
+#content table tbody tr td:nth-child(1),
+#content table tbody tr td:nth-child(4) {
+  text-align: center;
+}
+#content table tbody tr td span span:first-child {
+  text-align: right;
+  display: inline;
+}
+
+#content table tbody tr td span span:nth-child(2) {
+  text-align: center;
+}*/
