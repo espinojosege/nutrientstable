@@ -13,82 +13,31 @@ for (let i = 0; i < tables.length; i++) {
   ];
   let propSecondary = ["name", "size", "fat", "cholesterol", "sodium", "sugar"];
   let table = tables[i];
-  //if (i == 0) {
-  //  let colgroup = document.createElement("colgroup");
-  //  for (let index = 0; index < 6; index++) {
-  //    let col = document.createElement("col");
-  //    if ([1, 3, 4, 5].includes(index)) {
-  //      if (index == 1) {
-  //        col.setAttribute("span", "2");
-  //        col.setAttribute(
-  //          "style",
-  //          "background-color: #ccffcc; border: 0px solid black; width: 10%"
-  //        );
-  //        //let col1 = document.createElement("col");
-  //        //col1.setAttribute("span", "1");
-  //        //col1.setAttribute(
-  //        //  "style",
-  //        //  "background-color: #ffffcc; border: 1px solid black; width: 10%"
-  //        //);
-  //        colgroup.appendChild(col);
-  //        //colgroup.appendChild(col1);
-  //      }
-  //      if (index == 3) {
-  //        col.setAttribute("span", "1");
-  //        col.setAttribute(
-  //          "style",
-  //          "background-color: #99ffcc; border-right: 0px solid black; width: 10%"
-  //        );
-  //        let col1 = document.createElement("col");
-  //        col1.setAttribute("span", "1");
-  //        col1.setAttribute(
-  //          "style",
-  //          "background-color: #99ffcc; border-right: 1px solid black; width: 10%"
-  //        );
-  //        colgroup.appendChild(col);
-  //        colgroup.appendChild(col1);
-  //      }
-  //      if (index == 4) {
-  //        col.setAttribute("span", "1");
-  //        col.setAttribute(
-  //          "style",
-  //          "background-color: #66ffcc; border: 0px solid black; width: 10%"
-  //        );
-  //        let col1 = document.createElement("col");
-  //        col1.setAttribute("span", "1");
-  //        col1.setAttribute(
-  //          "style",
-  //          "background-color: #66ffcc; border-right: 1px solid black; width: 10%"
-  //        );
-  //        colgroup.appendChild(col);
-  //        colgroup.appendChild(col1);
-  //      }
-  //      if (index == 5) {
-  //        col.setAttribute("span", "1");
-  //        col.setAttribute(
-  //          "style",
-  //          "background-color: #00ffcc; border: 0px solid black; width: 10%"
-  //        );
-  //        let col1 = document.createElement("col");
-  //        col1.setAttribute("span", "1");
-  //        col1.setAttribute(
-  //          "style",
-  //          "background-color: #00ffcc; border-right: 1px solid black; width: 10%"
-  //        );
-  //        colgroup.appendChild(col);
-  //        colgroup.appendChild(col1);
-  //      }
-  //    } else {
-  //      col.setAttribute("span", "1");
-  //      col.setAttribute("class", "col-hover");
-  //      col.addEventListener("click", function (event) {
-  //        console.log(event);
-  //      });
-  //      colgroup.appendChild(col);
-  //    }
-  //  }
-  //  table.appendChild(colgroup);
-  //}
+  if (i == 0) {
+    let colgroup = document.createElement("colgroup");
+    let rgb = [60, 255, 60];
+    for (let index = 0; index < 10; index++) {
+      let temp = rgb;
+      let rate = 18;
+      let col = document.createElement("col");
+      col.setAttribute(
+        "style",
+        `
+        background-color: rgb(${temp[0]}, ${temp[1]}, ${temp[2]});;
+        `
+      );
+      if ([1, 3, 4, 6, 8].includes(index)) {
+        col.style.borderLeft = `1px solid black`;
+        col.setAttribute("span", "1");
+      }
+      colgroup.appendChild(col);
+      temp.forEach((number, index) => {
+        rgb[index] = number + rate;
+      });
+      rgb = temp;
+    }
+    table.appendChild(colgroup);
+  }
   let thead = document.createElement("thead");
 
   table.appendChild(thead);
@@ -103,7 +52,7 @@ for (let i = 0; i < tables.length; i++) {
     prop.forEach((property, index) => {
       let th = document.createElement("th");
       if (index == 0) {
-        th.innerHTML = "Ingredient";
+        th.innerHTML = "Food";
         rowinfo.appendChild(th);
       }
       if (index == 1) {
@@ -151,7 +100,7 @@ for (let i = 0; i < tables.length; i++) {
         th.setAttribute("colspan", "1");
         th.innerHTML = "";
         let empty = document.createElement("th");
-        empty.innerHTML = "Ingredient";
+        empty.innerHTML = "food";
         rowinfo.appendChild(empty);
       }
       if ([1, 2, 3, 4, 5].includes(index)) {
@@ -307,9 +256,9 @@ class Ingredient {
       result = 0;
     } else {
       let calculation = (number / base) * multiple;
-      if (calculation % 1 >= 0.6) {
+      if (calculation % 1 >= 0.65) {
         result = Math.ceil(calculation);
-      } else if (calculation % 1 < 0.6 && calculation % 1 > 0.4) {
+      } else if (calculation % 1 < 0.644 && calculation % 1 > 0.444) {
         result = Math.floor(calculation) + 0.5;
       } else {
         result = Math.floor(calculation);
@@ -433,14 +382,27 @@ let tomatoe = new Ingredient("🍅", [148, "gram"], 35, 1, 0, 5, 6, 1, 6, 1);
 
 let avocado = new Ingredient("🥑", [50, "gram"], 240, 22, 0, 10, 2.8, 10, 1, 3);
 
+let groundTurkey = new Ingredient(
+  "G🦃",
+  [112, "gram"],
+  150,
+  8,
+  80,
+  90,
+  0,
+  0,
+  0,
+  20
+);
+
 let newarr = Ingredient.instance.sort((a, b) => b.protein - a.protein);
 
-newarr.forEach((ingredient) => {
+newarr.forEach((ingredient, index) => {
   let primaryTable = document.getElementById("primary");
   let secondaryTable = document.getElementById("secondary");
   let tables = [primaryTable, secondaryTable];
-  let rowPrimary = tables[0].insertRow();
-  let rowSecondary = tables[1].insertRow();
+  let rowPrimary = tables[0].insertRow(index);
+  let rowSecondary = tables[1].insertRow(index);
   let rows = [rowPrimary, rowSecondary];
   for (const [key, value] of Object.entries(ingredient)) {
     if (key === "name") {
@@ -484,9 +446,239 @@ newarr.forEach((ingredient) => {
   }
 });
 
-//newarr.forEach((ingredient) => {
-//  console.table(ingredient);
-//});
+newarr.forEach((ingredient) => {
+  console.log(ingredient);
+});
+
+class Recipe {
+  constructor(...arg) {
+    let arr1 = arg;
+    console.log(arr1);
+    let ingredients = [];
+    for (let i = 1; i < arr1.length; i += 2) {
+      const ingrd = arr1[i];
+      let base = arr1[i + 1];
+      let obj = new Object();
+      for (const [key, value] of Object.entries(ingrd)) {
+        //console.log(key, value);
+        if (typeof value === "number") {
+          obj[key] = this.returnWholeNumber(base, value);
+        } else if (key === "size") {
+          //console.log(value.amount, value.unit);
+          obj[key] = {
+            amount: this.returnWholeNumber(base, value.amount),
+            unit: value.unit,
+          };
+        } else {
+          obj[key] = value;
+        }
+      }
+      console.log(obj, i, base);
+      ingredients.push(obj);
+    }
+
+    //this.name =
+    //this.calories = ingredients.reduce((totalCalories, currentCalories) => {
+    //  return (totalCalories += currentCalories.calories);
+    //}, 0);
+    this.name = arr1[0];
+    this.calories = this.sumFact(ingredients, "calories");
+    this.fat = this.sumFact(ingredients, "fat");
+    this.cholesterol = this.sumFact(ingredients, "cholesterol");
+    this.sodium = this.sumFact(ingredients, "sodium");
+    this.carbohydrates = this.sumFact(ingredients, "carbohydrates");
+    this.fiber = this.sumFact(ingredients, "fiber");
+    this.sugar = this.sumFact(ingredients, "sugar");
+    this.protein = this.sumFact(ingredients, "protein");
+    console.log(this);
+    //console.log(Object.values(ingredients[0])[2]);
+    createTableRow(this, ingredients);
+
+    //Recipe.instance.push(this);
+  }
+
+  sumFact(array, key) {
+    let result = array.reduce((total, current) => {
+      return total + current[key];
+    }, 0);
+
+    return result;
+  }
+
+  returnWholeNumber(multiple, number) {
+    let result;
+    if (number == 0 || multiple == 0) {
+      result = 0;
+    } else {
+      let calculation = multiple * number;
+      if (calculation % 1 >= 0.655) {
+        result = Math.ceil(calculation);
+      } else if (calculation % 1 < 0.644 && calculation % 1 > 0.444) {
+        result = Math.floor(calculation) + 0.5;
+      } else {
+        console.log(calculation);
+        result = Math.floor(calculation);
+      }
+    }
+
+    return result;
+  }
+
+  static instance = [];
+}
+
+let smoothie = new Recipe(
+  "smoothie",
+  strawberries,
+  0.5,
+  peanutbutterPowder,
+  1,
+  chocoMilk,
+  0.5,
+  oatmeal,
+  1,
+  eggs,
+  2,
+  milk,
+  1
+);
+let sandwhich = new Recipe(
+  "sandwhich",
+  wheatBread,
+  3.6,
+  turkeySlice,
+  1,
+  tomatoe,
+  0.16,
+  cheeseSlice,
+  1
+);
+
+let Gsandwhich = new Recipe(
+  "gSandwhich",
+  wheatBread,
+  3.6,
+  groundTurkey,
+  1,
+  tomatoe,
+  0.16,
+  cheeseSlice,
+  1
+);
+let chickenMeal = new Recipe(
+  "Chicken",
+  chickenThighs,
+  4.2,
+  browRice,
+  1,
+  pintoBeans,
+  0.5,
+  babyCarrots,
+  0.21,
+  sweetPotatoes,
+  1
+);
+
+function createTableRow(object, array) {
+  let body = document.body;
+  let table = document.createElement("table");
+  let thead = document.createElement("thead");
+  let hrow = thead.insertRow();
+  let hrowc = thead.insertRow();
+  let tbody = document.createElement("tbody");
+  let tfoot = document.createElement("tfoot");
+  let trow = tfoot.insertRow();
+
+  for (const key of Object.keys(array[0])) {
+    let nameTh = document.createElement("th");
+    if (key == "name") {
+      nameTh.innerHTML = key;
+      hrowc.appendChild(nameTh);
+      let empty = document.createElement("th");
+      hrow.appendChild(empty);
+    } else if (
+      [
+        "size",
+        "fat",
+        "cholesterol",
+        "sodium",
+        "carbohydrates",
+        "fiber",
+        "sugar",
+        "protein",
+      ].includes(key)
+    ) {
+      nameTh.innerHTML = key;
+      nameTh.setAttribute("colspan", "2");
+      hrow.appendChild(nameTh);
+      let amountTh = document.createElement("th");
+      let unitTh = document.createElement("th");
+      amountTh.innerHTML = "QTY";
+      unitTh.innerHTML = "UNT";
+      hrowc.appendChild(amountTh);
+      hrowc.appendChild(unitTh);
+    } else if (key == "calories") {
+      nameTh.innerHTML = key;
+      hrowc.appendChild(nameTh);
+      let empty = document.createElement("th");
+      hrow.appendChild(empty);
+    }
+  }
+
+  array.forEach((obj, index) => {
+    let row = tbody.insertRow(index);
+
+    for (const [key, value] of Object.entries(obj)) {
+      let valueCell = row.insertCell();
+      let units;
+      if (["cholesterol", "sodium"].includes(key)) {
+        units = "mg";
+      } else {
+        units = "g";
+      }
+      if (["name", "calories"].includes(key)) {
+        valueCell.innerHTML = value;
+      } else if (key === "size") {
+        valueCell.innerHTML = value.amount;
+        let unitsCell = row.insertCell();
+        unitsCell.innerHTML = value.unit[0];
+      } else {
+        let unitsCell = row.insertCell();
+        valueCell.innerHTML = value;
+        unitsCell.innerHTML = units;
+      }
+    }
+  });
+
+  for (const [key, value] of Object.entries(object)) {
+    //console.log(key, value);
+    let units;
+    if (["cholesterol", "sodium"].includes(key)) {
+      units = "mg";
+    } else {
+      units = "g";
+    }
+    if (key === "name") {
+      let th = document.createElement("th");
+      th.setAttribute("colspan", "3");
+      th.innerHTML = value;
+      trow.appendChild(th);
+    } else if (["calories"].includes(key)) {
+      let valueCell = trow.insertCell();
+      valueCell.innerHTML = value;
+    } else {
+      let valueCell = trow.insertCell();
+      let unitsCell = trow.insertCell();
+      unitsCell.innerHTML = units;
+      valueCell.innerHTML = value;
+    }
+  }
+
+  table.appendChild(tfoot);
+  table.appendChild(tbody);
+  table.appendChild(thead);
+  body.appendChild(table);
+}
 
 //class Recipe {
 //  constructor(array) {

@@ -17,6 +17,17 @@ body {
   background-color: ivory;
 }
 
+body table {
+  font-size: 1.7rem;
+  width: 100%;
+  margin: 3rem auto;
+}
+
+body table tfoot tr td {
+  font-weight: bold;
+  font-family: monospace;
+}
+
 #heading {
   width: 100%;
   text-align: center;
@@ -35,7 +46,7 @@ body {
   white-space: nowrap;
   margin: 0;
   border: none;
-  border-collapse: separate;
+  border-collapse: collapse;
   border-spacing: 1px;
   table-layout: fixed;
   border: 1px solid black;
@@ -46,7 +57,7 @@ body {
 #content table th,
 #content table td {
   padding: 0.5rem 1rem;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
 }
 
 #content table thead tr:first-child th {
@@ -54,29 +65,38 @@ body {
   position: sticky;
   top: 0;
   z-index: 1;
-  width: 25vw;
-  background-color: #66ff66;
+  /*width: 16.66666666666667%;*/
+  background-color: rgb(60, 255, 60);
+  overflow-x: auto;
+}
+#content table thead tr:first-child th:nth-child(1),
+#content table thead tr:first-child th:nth-child(3) {
+  width: 10%;
 }
 #content table thead tr:nth-child(2) th {
   padding: 3px;
   position: sticky;
   top: 29px;
   z-index: 1;
-  width: 25vw;
-  background-color: #ccffcc;
+  /*width: 15%;*/
+  background-color: rgb(222, 417, 222);
+  overflow-x: auto;
 }
-/*#content table thead th:first-child {
-  background-color: white;
-  border: 0;
-}*/
+#content table thead tr:first-child th:first-child {
+  background-color: rgb(255, 60, 255);
+
+  /*border: 0;*/
+}
 
 #content table td {
-  background-color: #f2f2f2;
+  /*background-color: #f2f2f2;*/
   padding: 4px 5px;
   text-align: left;
 }
 
 #content table tbody th {
+  width: 50px;
+  height: 50px;
   font-weight: 100;
   font-style: italic;
   text-align: center;
@@ -84,16 +104,30 @@ body {
 }
 
 #content table thead tr:nth-child(2) th:first-child {
+  overflow-x: auto;
   position: sticky;
   left: 0;
-  background-color: ccffcc;
+  /*background-color: ccffcc;*/
   z-index: 2;
 }
 #content table tbody th {
   position: sticky;
   left: 0;
-  background-color: #ccffcc;
+  /*background-color: #ccffcc;*/
+  background-color: rgb(60, 255, 60);
   z-index: 0;
+}
+
+#content table tbody tr:hover td {
+  background-color: rgb(60, 255, 60);
+}
+
+#content table tbody tr td:nth-child(3),
+#content table tbody tr td:nth-child(4),
+#content table tbody tr td:nth-child(6),
+#content table tbody tr td:nth-child(8),
+#content table tbody tr td:nth-child(9) {
+  text-align: center;
 }
 
 /*#content table tbody tr:hover {
