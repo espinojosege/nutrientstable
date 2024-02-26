@@ -482,6 +482,7 @@ class Recipe {
     //  return (totalCalories += currentCalories.calories);
     //}, 0);
     this.name = arr1[0];
+    this.size = { amount: this.sumFact(ingredients, "size"), unit: "gram" };
     this.calories = this.sumFact(ingredients, "calories");
     this.fat = this.sumFact(ingredients, "fat");
     this.cholesterol = this.sumFact(ingredients, "cholesterol");
@@ -490,7 +491,7 @@ class Recipe {
     this.fiber = this.sumFact(ingredients, "fiber");
     this.sugar = this.sumFact(ingredients, "sugar");
     this.protein = this.sumFact(ingredients, "protein");
-    console.log(this);
+    console.log(this.size);
     //console.log(Object.values(ingredients[0])[2]);
     createTableRow(this, ingredients);
 
@@ -499,7 +500,11 @@ class Recipe {
 
   sumFact(array, key) {
     let result = array.reduce((total, current) => {
-      return total + current[key];
+      if (key === "size") {
+        return total + current[key].amount;
+      } else {
+        return total + current[key];
+      }
     }, 0);
 
     return result;
@@ -658,9 +663,15 @@ function createTableRow(object, array) {
     } else {
       units = "g";
     }
-    if (key === "name") {
+    if (key === "size") {
+      let valueCell = trow.insertCell();
+      let unitsCell = trow.insertCell();
+      valueCell.innerHTML = value.amount;
+      unitsCell.innerHTML = value.unit[0];
+      console.log(trow);
+    } else if (key === "name") {
       let th = document.createElement("th");
-      th.setAttribute("colspan", "3");
+      th.setAttribute("colspan", "1");
       th.innerHTML = value;
       trow.appendChild(th);
     } else if (["calories"].includes(key)) {
@@ -678,6 +689,31 @@ function createTableRow(object, array) {
   table.appendChild(tbody);
   table.appendChild(thead);
   body.appendChild(table);
+}
+
+let meals = new Recipe(
+  "today's Meal",
+  smoothie,
+  1,
+  sandwhich,
+  1,
+  chickenMeal,
+  1
+);
+
+test(strawberries, milk, oatmeal, eggs);
+
+function test(...arg) {
+  let div = document.getElementById("testing");
+  let array = arg;
+  console.log(array);
+  array.forEach((ingredient, index) => {
+    console.log(ingredient, index);
+  });
+
+  function ingredientToTr(ingredient) {
+    let tr = document.createElement("tr");
+  }
 }
 
 //class Recipe {
